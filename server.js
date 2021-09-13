@@ -26,3 +26,13 @@ app.get("/api/quotes", (req, res, next) => {
   }
   res.send({ quotes: quotesSelection });
 });
+
+app.post("/api/quotes", (req, res, next) => {
+  if ("person" in req.query && "quote" in req.query) {
+    const { person, quote } = req.query;
+    quotes.push({ person, quote });
+    res.send({ quote: quotes[quotes.length - 1] });
+  } else {
+    res.sendStatus(400);
+  }
+});
